@@ -210,8 +210,38 @@ h1 {
     0 0 0 5px var(--rim-dark), 0 18px 40px rgba(0, 0, 0, .55);
 }
 .frame img, .frame video { width: 100%; }
-.hero-media .frame { max-width: 520px; }
+.hero-media .frame { max-width: 520px; position: relative; }
+
+/* The music button on the video: muted until the visitor asks for sound. */
+.sound {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(221, 167, 59, .85);
+  background: rgba(42, 14, 2, .78);
+  color: var(--brass-light);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .45);
+  transition: scale .15s ease-out, background-color .15s ease-out;
+}
+.sound:hover { background: rgba(93, 26, 0, .92); color: var(--rim-light); }
+.sound:active { scale: .96; }
+.sound svg {
+  grid-area: 1 / 1;
+  transition-property: opacity, scale, filter;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.sound .sound-on, .sound[aria-pressed="true"] .sound-off { opacity: 0; scale: .25; filter: blur(4px); }
+.sound[aria-pressed="true"] .sound-on { opacity: 1; scale: 1; filter: blur(0); }
 .hero-media figcaption { margin-top: 16px; text-align: center; font-size: 14px; line-height: 1.6; color: var(--on-ground-soft); }
+.hero-media figcaption a { color: var(--brass-light); }
 
 /* ---- plates: paper with the plaque's rim, the title mounted on its top edge ---- */
 .plate {

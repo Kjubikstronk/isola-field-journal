@@ -44,3 +44,14 @@ if (hero && matchMedia('(prefers-reduced-motion: reduce)').matches) {
   hero.pause();
   hero.controls = true;
 }
+
+// Browsers only autoplay muted video, so the music waits for the speaker button.
+const sound = $('heroSound');
+if (hero && sound) {
+  sound.addEventListener('click', () => {
+    hero.muted = !hero.muted;
+    if (!hero.muted && hero.paused) hero.play().catch(() => {});
+    sound.setAttribute('aria-pressed', String(!hero.muted));
+    sound.setAttribute('aria-label', hero.muted ? 'Play the music' : 'Mute the music');
+  });
+}

@@ -15,6 +15,7 @@
 <p align="center">
   <img src="media/demo.gif" alt="Recorded in a real game: the folded panel sits beside Plant Tycoon, Ctrl+E opens it, and clicking pots shows each plant with its water and health." width="720">
 </p>
+<p align="center"><a href="https://kjubikstronk.github.io/isola-field-journal/media/promo.mp4"><b>&#9654; Watch the 47-second tour, with music</b></a></p>
 
 Isola Field Journal sits on top of your game, reads your nursery as you play,
 and tells you which pots to cross, what to plant next, and when no cross can get
