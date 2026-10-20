@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plant Tycoon Breeding Calculator: all 529 species and the six Magic Plants</title>
+<meta name="description" content="Cross any two Plant Tycoon plants, find the shortest breeding route from the plants you have to the one you want, and get a recipe for all six Magic Plants. Free, exact, no sign-up.">
+<link rel="canonical" href="https://kjubikstronk.github.io/isola-field-journal/calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Isola Field Journal">
+<meta property="og:title" content="Plant Tycoon Breeding Calculator">
+<meta property="og:description" content="Every cross, the shortest route to any plant, and a recipe for all six Magic Plants. Exact, because breeding is one rule.">
+<meta property="og:url" content="https://kjubikstronk.github.io/isola-field-journal/calculator.html">
+<meta property="og:image" content="https://kjubikstronk.github.io/isola-field-journal/media/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#3A1404">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="wordmark" href="./"><img src="favicon.svg" alt="" width="28" height="28">Isola Field Journal</a>
+    <nav class="topnav" aria-label="Site">
+      <a href="./">The app</a>
+      <a class="btn-wood small hide-small" href="https://github.com/Kjubikstronk/isola-field-journal/releases/latest/download/IsolaFieldJournal-setup.exe">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-head">
+    <p class="eyebrow">Plant Tycoon</p>
+    <h1>Breeding calculator</h1>
+    <p class="lede">All 529 species follow one rule: a seed's leaves and flowers are each the average of its parents', rounded up. So every answer here is exact, not a guess.</p>
+  </div>
+
+  <section class="plate tool" aria-labelledby="crossTitle">
+    <h2 class="plaque" id="crossTitle">Cross two plants</h2>
+    <form class="cross-row" id="crossForm" novalidate>
+      <label class="field"><span>First plant</span>
+        <input id="crossA" list="speciesList" autocomplete="off" spellcheck="false" placeholder="e.g. Jalapa Bamboo"></label>
+      <span class="times" aria-hidden="true">&times;</span>
+      <label class="field"><span>Second plant</span>
+        <input id="crossB" list="speciesList" autocomplete="off" spellcheck="false" placeholder="e.g. Fragrant Fanleaf"></label>
+    </form>
+    <div class="result" id="crossOut" aria-live="polite"></div>
+  </section>
+
+  <section class="plate tool" id="route" aria-labelledby="routeTitle">
+    <h2 class="plaque" id="routeTitle">From your plants</h2>
+    <p class="note">Add the plants you have, growing or as seed, then pick the one you want. You get the fewest crosses that make it, or the reason no cross can.</p>
+    <form class="own-add" id="ownForm" novalidate>
+      <label class="field"><span>A plant you have</span>
+        <input id="ownInput" list="speciesList" autocomplete="off" spellcheck="false" placeholder="e.g. Venomous Maranta"></label>
+      <button class="btn-paper" type="submit">Add</button>
+    </form>
+    <ul class="chips" id="ownList" aria-label="Your plants"></ul>
+    <form id="targetForm" novalidate>
+      <label class="field"><span>The plant you want</span>
+        <input id="target" list="speciesList" autocomplete="off" spellcheck="false" placeholder="e.g. Fourpetal Maple"></label>
+    </form>
+    <div class="result" id="routeOut" aria-live="polite"></div>
+  </section>
+
+  <section class="plate" id="magic" aria-labelledby="magicTitle">
+    <h2 class="plaque" id="magicTitle">The six Magic Plants</h2>
+    <p class="note narrow">Finding all six is the goal of the game. None is tier 4, so each can be bred from ordinary stock. Each card gives one cross that makes it; "Route from my plants" works out the way from what you have.</p>
+    <div class="magic-grid">
+      <article class="magic">
+        <h3>Magic Tree of Fragrance</h3>
+        <p class="species">Fourpetal Maple</p>
+        <p><span class="tier t1">T1</span> Its effect: more visitors and rarer insects.</p>
+        <p>Needs the basic soil and water.</p>
+        <p>One cross that makes it: <b>Blazing Bamboo</b> with <b>Aureus Rare Oak</b>.</p>
+        <button class="btn-paper" type="button" data-target="Fourpetal Maple">Route from my plants</button>
+      </article>
+      <article class="magic">
+        <h3>Rose of Joy</h3>
+        <p class="species">Rosaceae Fern</p>
+        <p><span class="tier t2">T2</span> Its effect: a steady crowd of visitors.</p>
+        <p>Needs the basic soil and water, with attention.</p>
+        <p>One cross that makes it: <b>Mystic Gladiatus</b> with <b>Viola Ananas</b>.</p>
+        <button class="btn-paper" type="button" data-target="Rosaceae Fern">Route from my plants</button>
+      </article>
+      <article class="magic">
+        <h3>Golden Berries of Wealth</h3>
+        <p class="species">Aureus Scandens</p>
+        <p><span class="tier t3">T3</span> Its effect: customers pay more, for everything.</p>
+        <p>Needs Bio-organic Soil ($850) and Filtered Water ($650).</p>
+        <p>One cross that makes it: <b>Fourpetal Reptans</b> with <b>Venomous Grass</b>.</p>
+        <button class="btn-paper" type="button" data-target="Aureus Scandens">Route from my plants</button>
+      </article>
+      <article class="magic">
+        <h3>Fabled Rose of Isola</h3>
+        <p class="species">Fabled Lemonbush</p>
+        <p><span class="tier t3">T3</span> Its effect: sells for the most of any plant.</p>
+        <p>Needs Bio-organic Soil ($850) and Filtered Water ($650).</p>
+        <p>One cross that makes it: <b>Jalapa Fanleaf</b> with <b>Fragrant Bamboo</b>.</p>
+        <button class="btn-paper" type="button" data-target="Fabled Lemonbush">Route from my plants</button>
+      </article>
+      <article class="magic">
+        <h3>Fruit of Life</h3>
+        <p class="species">Mela Rare Oak</p>
+        <p><span class="tier t3">T3</span> Its effect: plants resist infestation and flower more.</p>
+        <p>Needs Bio-organic Soil ($850) and Filtered Water ($650).</p>
+        <p>One cross that makes it: <b>Venomous Maple</b> with <b>Citrus Pipe Cactus</b>.</p>
+        <button class="btn-paper" type="button" data-target="Mela Rare Oak">Route from my plants</button>
+      </article>
+      <article class="magic">
+        <h3>Flower of Knowledge</h3>
+        <p class="species">Nox Orchid</p>
+        <p><span class="tier t3">T3</span> Its effect: every plant priced near its true value.</p>
+        <p>Needs Bio-organic Soil ($850) and Filtered Water ($650).</p>
+        <p>One cross that makes it: <b>Daisy Grass</b> with <b>Bluestar Astera</b>.</p>
+        <button class="btn-paper" type="button" data-target="Nox Orchid">Route from my plants</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="plate" id="chart" aria-labelledby="chartTitle">
+    <h2 class="plaque" id="chartTitle">All 529 species</h2>
+    <p class="note narrow">Leaves down the side, flowers along the top, both from lowest to highest. The colour is the plant's tier: the higher it is, the better the soil and water it needs. Magic Plants have a gold ring. Pick a square to see the plant.</p>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--t1-flat)"></i>Tier 1</span>
+      <span><i style="background:var(--t2-flat)"></i>Tier 2</span>
+      <span><i style="background:var(--t3-flat)"></i>Tier 3: Bio-organic Soil, Filtered Water</span>
+      <span><i style="background:var(--t4-flat)"></i>Tier 4: Soil and Water from Isola</span>
+    </div>
+    <div class="chart-wrap"><div class="chart" id="chartGrid" role="group" aria-label="All 529 species by leaves and flowers"></div></div>
+    <div class="result" id="chartOut" aria-live="polite"></div>
+    <details class="all-species">
+      <summary>Every species by name</summary>
+      <div class="species-columns">
+        <section><h4>Reptans leaves</h4><ul><li>Spotted Reptans</li><li>Painted Reptans</li><li>Daisy Reptans</li><li>Nox Reptans</li><li>Bluestar Reptans</li><li>Mystic Reptans</li><li>Rosaceae Reptans</li><li>Viola Reptans</li><li>Jalapa Reptans</li><li>Fabled Reptans</li><li>Fragrant Reptans</li><li>Blazing Reptans</li><li>Fourpetal Reptans</li><li>Aureus Reptans</li><li>Venomous Reptans</li><li>Mela Reptans</li><li>Citrus Reptans</li><li>Arthurium Reptans</li><li>Venus Reptans</li><li>Tahitian Reptans</li><li>Lilia Reptans</li><li>Baccatus Reptans</li><li>Tilia Reptans</li></ul></section>
+        <section><h4>Scandens leaves</h4><ul><li>Spotted Scandens</li><li>Painted Scandens</li><li>Daisy Scandens</li><li>Nox Scandens</li><li>Bluestar Scandens</li><li>Mystic Scandens</li><li>Rosaceae Scandens</li><li>Viola Scandens</li><li>Jalapa Scandens</li><li>Fabled Scandens</li><li>Fragrant Scandens</li><li>Blazing Scandens</li><li>Fourpetal Scandens</li><li>Aureus Scandens</li><li>Venomous Scandens</li><li>Mela Scandens</li><li>Citrus Scandens</li><li>Arthurium Scandens</li><li>Venus Scandens</li><li>Tahitian Scandens</li><li>Lilia Scandens</li><li>Baccatus Scandens</li><li>Tilia Scandens</li></ul></section>
+        <section><h4>Grass leaves</h4><ul><li>Spotted Grass</li><li>Painted Grass</li><li>Daisy Grass</li><li>Nox Grass</li><li>Bluestar Grass</li><li>Mystic Grass</li><li>Rosaceae Grass</li><li>Viola Grass</li><li>Jalapa Grass</li><li>Fabled Grass</li><li>Fragrant Grass</li><li>Blazing Grass</li><li>Fourpetal Grass</li><li>Aureus Grass</li><li>Venomous Grass</li><li>Mela Grass</li><li>Citrus Grass</li><li>Arthurium Grass</li><li>Venus Grass</li><li>Tahitian Grass</li><li>Lilia Grass</li><li>Baccatus Grass</li><li>Tilia Grass</li></ul></section>
+        <section><h4>Orchid leaves</h4><ul><li>Spotted Orchid</li><li>Painted Orchid</li><li>Daisy Orchid</li><li>Nox Orchid</li><li>Bluestar Orchid</li><li>Mystic Orchid</li><li>Rosaceae Orchid</li><li>Viola Orchid</li><li>Jalapa Orchid</li><li>Fabled Orchid</li><li>Fragrant Orchid</li><li>Blazing Orchid</li><li>Fourpetal Orchid</li><li>Aureus Orchid</li><li>Venomous Orchid</li><li>Mela Orchid</li><li>Citrus Orchid</li><li>Arthurium Orchid</li><li>Venus Orchid</li><li>Tahitian Orchid</li><li>Lilia Orchid</li><li>Baccatus Orchid</li><li>Tilia Orchid</li></ul></section>
+        <section><h4>Astera leaves</h4><ul><li>Spotted Astera</li><li>Painted Astera</li><li>Daisy Astera</li><li>Nox Astera</li><li>Bluestar Astera</li><li>Mystic Astera</li><li>Rosaceae Astera</li><li>Viola Astera</li><li>Jalapa Astera</li><li>Fabled Astera</li><li>Fragrant Astera</li><li>Blazing Astera</li><li>Fourpetal Astera</li><li>Aureus Astera</li><li>Venomous Astera</li><li>Mela Astera</li><li>Citrus Astera</li><li>Arthurium Astera</li><li>Venus Astera</li><li>Tahitian Astera</li><li>Lilia Astera</li><li>Baccatus Astera</li><li>Tilia Astera</li></ul></section>
+        <section><h4>Gladiatus leaves</h4><ul><li>Spotted Gladiatus</li><li>Painted Gladiatus</li><li>Daisy Gladiatus</li><li>Nox Gladiatus</li><li>Bluestar Gladiatus</li><li>Mystic Gladiatus</li><li>Rosaceae Gladiatus</li><li>Viola Gladiatus</li><li>Jalapa Gladiatus</li><li>Fabled Gladiatus</li><li>Fragrant Gladiatus</li><li>Blazing Gladiatus</li><li>Fourpetal Gladiatus</li><li>Aureus Gladiatus</li><li>Venomous Gladiatus</li><li>Mela Gladiatus</li><li>Citrus Gladiatus</li><li>Arthurium Gladiatus</li><li>Venus Gladiatus</li><li>Tahitian Gladiatus</li><li>Lilia Gladiatus</li><li>Baccatus Gladiatus</li><li>Tilia Gladiatus</li></ul></section>
+        <section><h4>Fern leaves</h4><ul><li>Spotted Fern</li><li>Painted Fern</li><li>Daisy Fern</li><li>Nox Fern</li><li>Bluestar Fern</li><li>Mystic Fern</li><li>Rosaceae Fern</li><li>Viola Fern</li><li>Jalapa Fern</li><li>Fabled Fern</li><li>Fragrant Fern</li><li>Blazing Fern</li><li>Fourpetal Fern</li><li>Aureus Fern</li><li>Venomous Fern</li><li>Mela Fern</li><li>Citrus Fern</li><li>Arthurium Fern</li><li>Venus Fern</li><li>Tahitian Fern</li><li>Lilia Fern</li><li>Baccatus Fern</li><li>Tilia Fern</li></ul></section>
+        <section><h4>Ananas leaves</h4><ul><li>Spotted Ananas</li><li>Painted Ananas</li><li>Daisy Ananas</li><li>Nox Ananas</li><li>Bluestar Ananas</li><li>Mystic Ananas</li><li>Rosaceae Ananas</li><li>Viola Ananas</li><li>Jalapa Ananas</li><li>Fabled Ananas</li><li>Fragrant Ananas</li><li>Blazing Ananas</li><li>Fourpetal Ananas</li><li>Aureus Ananas</li><li>Venomous Ananas</li><li>Mela Ananas</li><li>Citrus Ananas</li><li>Arthurium Ananas</li><li>Venus Ananas</li><li>Tahitian Ananas</li><li>Lilia Ananas</li><li>Baccatus Ananas</li><li>Tilia Ananas</li></ul></section>
+        <section><h4>Maranta leaves</h4><ul><li>Spotted Maranta</li><li>Painted Maranta</li><li>Daisy Maranta</li><li>Nox Maranta</li><li>Bluestar Maranta</li><li>Mystic Maranta</li><li>Rosaceae Maranta</li><li>Viola Maranta</li><li>Jalapa Maranta</li><li>Fabled Maranta</li><li>Fragrant Maranta</li><li>Blazing Maranta</li><li>Fourpetal Maranta</li><li>Aureus Maranta</li><li>Venomous Maranta</li><li>Mela Maranta</li><li>Citrus Maranta</li><li>Arthurium Maranta</li><li>Venus Maranta</li><li>Tahitian Maranta</li><li>Lilia Maranta</li><li>Baccatus Maranta</li><li>Tilia Maranta</li></ul></section>
+        <section><h4>Fanleaf leaves</h4><ul><li>Spotted Fanleaf</li><li>Painted Fanleaf</li><li>Daisy Fanleaf</li><li>Nox Fanleaf</li><li>Bluestar Fanleaf</li><li>Mystic Fanleaf</li><li>Rosaceae Fanleaf</li><li>Viola Fanleaf</li><li>Jalapa Fanleaf</li><li>Fabled Fanleaf</li><li>Fragrant Fanleaf</li><li>Blazing Fanleaf</li><li>Fourpetal Fanleaf</li><li>Aureus Fanleaf</li><li>Venomous Fanleaf</li><li>Mela Fanleaf</li><li>Citrus Fanleaf</li><li>Arthurium Fanleaf</li><li>Venus Fanleaf</li><li>Tahitian Fanleaf</li><li>Lilia Fanleaf</li><li>Baccatus Fanleaf</li><li>Tilia Fanleaf</li></ul></section>
+        <section><h4>Lemonbush leaves</h4><ul><li>Spotted Lemonbush</li><li>Painted Lemonbush</li><li>Daisy Lemonbush</li><li>Nox Lemonbush</li><li>Bluestar Lemonbush</li><li>Mystic Lemonbush</li><li>Rosaceae Lemonbush</li><li>Viola Lemonbush</li><li>Jalapa Lemonbush</li><li>Fabled Lemonbush</li><li>Fragrant Lemonbush</li><li>Blazing Lemonbush</li><li>Fourpetal Lemonbush</li><li>Aureus Lemonbush</li><li>Venomous Lemonbush</li><li>Mela Lemonbush</li><li>Citrus Lemonbush</li><li>Arthurium Lemonbush</li><li>Venus Lemonbush</li><li>Tahitian Lemonbush</li><li>Lilia Lemonbush</li><li>Baccatus Lemonbush</li><li>Tilia Lemonbush</li></ul></section>
+        <section><h4>Bamboo leaves</h4><ul><li>Spotted Bamboo</li><li>Painted Bamboo</li><li>Daisy Bamboo</li><li>Nox Bamboo</li><li>Bluestar Bamboo</li><li>Mystic Bamboo</li><li>Rosaceae Bamboo</li><li>Viola Bamboo</li><li>Jalapa Bamboo</li><li>Fabled Bamboo</li><li>Fragrant Bamboo</li><li>Blazing Bamboo</li><li>Fourpetal Bamboo</li><li>Aureus Bamboo</li><li>Venomous Bamboo</li><li>Mela Bamboo</li><li>Citrus Bamboo</li><li>Arthurium Bamboo</li><li>Venus Bamboo</li><li>Tahitian Bamboo</li><li>Lilia Bamboo</li><li>Baccatus Bamboo</li><li>Tilia Bamboo</li></ul></section>
+        <section><h4>Maple leaves</h4><ul><li>Spotted Maple</li><li>Painted Maple</li><li>Daisy Maple</li><li>Nox Maple</li><li>Bluestar Maple</li><li>Mystic Maple</li><li>Rosaceae Maple</li><li>Viola Maple</li><li>Jalapa Maple</li><li>Fabled Maple</li><li>Fragrant Maple</li><li>Blazing Maple</li><li>Fourpetal Maple</li><li>Aureus Maple</li><li>Venomous Maple</li><li>Mela Maple</li><li>Citrus Maple</li><li>Arthurium Maple</li><li>Venus Maple</li><li>Tahitian Maple</li><li>Lilia Maple</li><li>Baccatus Maple</li><li>Tilia Maple</li></ul></section>
+        <section><h4>Rare Oak leaves</h4><ul><li>Spotted Rare Oak</li><li>Painted Rare Oak</li><li>Daisy Rare Oak</li><li>Nox Rare Oak</li><li>Bluestar Rare Oak</li><li>Mystic Rare Oak</li><li>Rosaceae Rare Oak</li><li>Viola Rare Oak</li><li>Jalapa Rare Oak</li><li>Fabled Rare Oak</li><li>Fragrant Rare Oak</li><li>Blazing Rare Oak</li><li>Fourpetal Rare Oak</li><li>Aureus Rare Oak</li><li>Venomous Rare Oak</li><li>Mela Rare Oak</li><li>Citrus Rare Oak</li><li>Arthurium Rare Oak</li><li>Venus Rare Oak</li><li>Tahitian Rare Oak</li><li>Lilia Rare Oak</li><li>Baccatus Rare Oak</li><li>Tilia Rare Oak</li></ul></section>
+        <section><h4>Pipe Cactus leaves</h4><ul><li>Spotted Pipe Cactus</li><li>Painted Pipe Cactus</li><li>Daisy Pipe Cactus</li><li>Nox Pipe Cactus</li><li>Bluestar Pipe Cactus</li><li>Mystic Pipe Cactus</li><li>Rosaceae Pipe Cactus</li><li>Viola Pipe Cactus</li><li>Jalapa Pipe Cactus</li><li>Fabled Pipe Cactus</li><li>Fragrant Pipe Cactus</li><li>Blazing Pipe Cactus</li><li>Fourpetal Pipe Cactus</li><li>Aureus Pipe Cactus</li><li>Venomous Pipe Cactus</li><li>Mela Pipe Cactus</li><li>Citrus Pipe Cactus</li><li>Arthurium Pipe Cactus</li><li>Venus Pipe Cactus</li><li>Tahitian Pipe Cactus</li><li>Lilia Pipe Cactus</li><li>Baccatus Pipe Cactus</li><li>Tilia Pipe Cactus</li></ul></section>
+        <section><h4>Pear Cactus leaves</h4><ul><li>Spotted Pear Cactus</li><li>Painted Pear Cactus</li><li>Daisy Pear Cactus</li><li>Nox Pear Cactus</li><li>Bluestar Pear Cactus</li><li>Mystic Pear Cactus</li><li>Rosaceae Pear Cactus</li><li>Viola Pear Cactus</li><li>Jalapa Pear Cactus</li><li>Fabled Pear Cactus</li><li>Fragrant Pear Cactus</li><li>Blazing Pear Cactus</li><li>Fourpetal Pear Cactus</li><li>Aureus Pear Cactus</li><li>Venomous Pear Cactus</li><li>Mela Pear Cactus</li><li>Citrus Pear Cactus</li><li>Arthurium Pear Cactus</li><li>Venus Pear Cactus</li><li>Tahitian Pear Cactus</li><li>Lilia Pear Cactus</li><li>Baccatus Pear Cactus</li><li>Tilia Pear Cactus</li></ul></section>
+        <section><h4>Ball Cactus leaves</h4><ul><li>Spotted Ball Cactus</li><li>Painted Ball Cactus</li><li>Daisy Ball Cactus</li><li>Nox Ball Cactus</li><li>Bluestar Ball Cactus</li><li>Mystic Ball Cactus</li><li>Rosaceae Ball Cactus</li><li>Viola Ball Cactus</li><li>Jalapa Ball Cactus</li><li>Fabled Ball Cactus</li><li>Fragrant Ball Cactus</li><li>Blazing Ball Cactus</li><li>Fourpetal Ball Cactus</li><li>Aureus Ball Cactus</li><li>Venomous Ball Cactus</li><li>Mela Ball Cactus</li><li>Citrus Ball Cactus</li><li>Arthurium Ball Cactus</li><li>Venus Ball Cactus</li><li>Tahitian Ball Cactus</li><li>Lilia Ball Cactus</li><li>Baccatus Ball Cactus</li><li>Tilia Ball Cactus</li></ul></section>
+        <section><h4>Glaber leaves</h4><ul><li>Spotted Glaber</li><li>Painted Glaber</li><li>Daisy Glaber</li><li>Nox Glaber</li><li>Bluestar Glaber</li><li>Mystic Glaber</li><li>Rosaceae Glaber</li><li>Viola Glaber</li><li>Jalapa Glaber</li><li>Fabled Glaber</li><li>Fragrant Glaber</li><li>Blazing Glaber</li><li>Fourpetal Glaber</li><li>Aureus Glaber</li><li>Venomous Glaber</li><li>Mela Glaber</li><li>Citrus Glaber</li><li>Arthurium Glaber</li><li>Venus Glaber</li><li>Tahitian Glaber</li><li>Lilia Glaber</li><li>Baccatus Glaber</li><li>Tilia Glaber</li></ul></section>
+        <section><h4>Tigerfern leaves</h4><ul><li>Spotted Tigerfern</li><li>Painted Tigerfern</li><li>Daisy Tigerfern</li><li>Nox Tigerfern</li><li>Bluestar Tigerfern</li><li>Mystic Tigerfern</li><li>Rosaceae Tigerfern</li><li>Viola Tigerfern</li><li>Jalapa Tigerfern</li><li>Fabled Tigerfern</li><li>Fragrant Tigerfern</li><li>Blazing Tigerfern</li><li>Fourpetal Tigerfern</li><li>Aureus Tigerfern</li><li>Venomous Tigerfern</li><li>Mela Tigerfern</li><li>Citrus Tigerfern</li><li>Arthurium Tigerfern</li><li>Venus Tigerfern</li><li>Tahitian Tigerfern</li><li>Lilia Tigerfern</li><li>Baccatus Tigerfern</li><li>Tilia Tigerfern</li></ul></section>
+        <section><h4>Pitcher leaves</h4><ul><li>Spotted Pitcher</li><li>Painted Pitcher</li><li>Daisy Pitcher</li><li>Nox Pitcher</li><li>Bluestar Pitcher</li><li>Mystic Pitcher</li><li>Rosaceae Pitcher</li><li>Viola Pitcher</li><li>Jalapa Pitcher</li><li>Fabled Pitcher</li><li>Fragrant Pitcher</li><li>Blazing Pitcher</li><li>Fourpetal Pitcher</li><li>Aureus Pitcher</li><li>Venomous Pitcher</li><li>Mela Pitcher</li><li>Citrus Pitcher</li><li>Arthurium Pitcher</li><li>Venus Pitcher</li><li>Tahitian Pitcher</li><li>Lilia Pitcher</li><li>Baccatus Pitcher</li><li>Tilia Pitcher</li></ul></section>
+        <section><h4>Weeper leaves</h4><ul><li>Spotted Weeper</li><li>Painted Weeper</li><li>Daisy Weeper</li><li>Nox Weeper</li><li>Bluestar Weeper</li><li>Mystic Weeper</li><li>Rosaceae Weeper</li><li>Viola Weeper</li><li>Jalapa Weeper</li><li>Fabled Weeper</li><li>Fragrant Weeper</li><li>Blazing Weeper</li><li>Fourpetal Weeper</li><li>Aureus Weeper</li><li>Venomous Weeper</li><li>Mela Weeper</li><li>Citrus Weeper</li><li>Arthurium Weeper</li><li>Venus Weeper</li><li>Tahitian Weeper</li><li>Lilia Weeper</li><li>Baccatus Weeper</li><li>Tilia Weeper</li></ul></section>
+        <section><h4>Multiflora leaves</h4><ul><li>Spotted Multiflora</li><li>Painted Multiflora</li><li>Daisy Multiflora</li><li>Nox Multiflora</li><li>Bluestar Multiflora</li><li>Mystic Multiflora</li><li>Rosaceae Multiflora</li><li>Viola Multiflora</li><li>Jalapa Multiflora</li><li>Fabled Multiflora</li><li>Fragrant Multiflora</li><li>Blazing Multiflora</li><li>Fourpetal Multiflora</li><li>Aureus Multiflora</li><li>Venomous Multiflora</li><li>Mela Multiflora</li><li>Citrus Multiflora</li><li>Arthurium Multiflora</li><li>Venus Multiflora</li><li>Tahitian Multiflora</li><li>Lilia Multiflora</li><li>Baccatus Multiflora</li><li>Tilia Multiflora</li></ul></section>
+        <section><h4>Ridgeball leaves</h4><ul><li>Spotted Ridgeball</li><li>Painted Ridgeball</li><li>Daisy Ridgeball</li><li>Nox Ridgeball</li><li>Bluestar Ridgeball</li><li>Mystic Ridgeball</li><li>Rosaceae Ridgeball</li><li>Viola Ridgeball</li><li>Jalapa Ridgeball</li><li>Fabled Ridgeball</li><li>Fragrant Ridgeball</li><li>Blazing Ridgeball</li><li>Fourpetal Ridgeball</li><li>Aureus Ridgeball</li><li>Venomous Ridgeball</li><li>Mela Ridgeball</li><li>Citrus Ridgeball</li><li>Arthurium Ridgeball</li><li>Venus Ridgeball</li><li>Tahitian Ridgeball</li><li>Lilia Ridgeball</li><li>Baccatus Ridgeball</li><li>Tilia Ridgeball</li></ul></section>
+      </div>
+    </details>
+  </section>
+
+  <section class="cta-band">
+    <h2>Want this live, over your own game?</h2>
+    <p>Isola Field Journal reads your nursery as you play and does all of this for you, pot by pot. Free for Windows.</p>
+    <a class="btn-wood" href="https://github.com/Kjubikstronk/isola-field-journal/releases/latest/download/IsolaFieldJournal-setup.exe">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Download for Windows
+    </a>
+  </section>
+</main>
+
+<datalist id="speciesList"></datalist>
+
+<footer class="footer">
+  <div class="footer-in">
+    <nav aria-label="More">
+      <a href="./">Isola Field Journal</a>
+      <a href="https://github.com/Kjubikstronk/isola-field-journal/releases">All versions and changes</a>
+      <a href="LICENSE.txt">Licence</a>
+      <a href="https://store.steampowered.com/app/16120/Plant_Tycoon/">Plant Tycoon on Steam</a>
+    </nav>
+    <p>An unofficial fan project. Plant Tycoon is a trademark of Last Day of Work, who are not involved and do not endorse it. The breeding rule was checked against the community's 529-cell chart and three independent walkthroughs.</p>
+  </div>
+</footer>
+
+<script type="module" src="calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isola Field Journal: a live breeding companion for Plant Tycoon</title>
+<meta name="description" content="A free overlay for Plant Tycoon on Windows. It reads your nursery as you play and tells you which pots to cross, what to plant next, and when no cross can get you there.">
+<link rel="canonical" href="https://kjubikstronk.github.io/isola-field-journal/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Isola Field Journal">
+<meta property="og:title" content="Isola Field Journal: stop guessing what to breed in Plant Tycoon">
+<meta property="og:description" content="A free overlay that reads your nursery live and names the pots to cross. Windows, 1.3 MB, no account, nothing sent anywhere.">
+<meta property="og:url" content="https://kjubikstronk.github.io/isola-field-journal/">
+<meta property="og:image" content="https://kjubikstronk.github.io/isola-field-journal/media/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#3A1404">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="wordmark" href="./"><img src="favicon.svg" alt="" width="28" height="28">Isola Field Journal</a>
+    <nav class="topnav" aria-label="Site">
+      <a href="calculator.html">Breeding calculator</a>
+      <a class="btn-wood small hide-small" href="https://github.com/Kjubikstronk/isola-field-journal/releases/latest/download/IsolaFieldJournal-setup.exe">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">A free companion for Plant Tycoon</p>
+      <h1>Stop guessing what to breed.</h1>
+      <p class="lede">Isola Field Journal sits on top of your game, reads your nursery as you play, and tells you which pots to cross, what to plant next, and when no cross can get you there.</p>
+      <div class="cta-row">
+        <a class="btn-wood" href="https://github.com/Kjubikstronk/isola-field-journal/releases/latest/download/IsolaFieldJournal-setup.exe">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download for Windows
+        </a>
+        <a class="btn-ghost" href="calculator.html">Try the calculator</a>
+      </div>
+      <p class="cta-meta">Free &middot; 1.3&nbsp;MB &middot; version 1.0.0</p>
+      <ul class="trust" aria-label="In short">
+        <li>Never goes online</li>
+        <li>Never changes your saves</li>
+        <li>Windows 10 and 11</li>
+      </ul>
+      <p class="only-small">On your phone? The app runs on a Windows PC, so open this page there. The <a href="calculator.html">breeding calculator</a> works right here.</p>
+      <p class="fineprint">You need your own copy of <a href="https://store.steampowered.com/app/16120/Plant_Tycoon/">Plant Tycoon on Steam</a>. An unofficial fan project, with no account and no ads.</p>
+    </div>
+    <figure class="hero-media">
+      <div class="frame">
+        <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="media/hero.webp" width="1180" height="820"
+               aria-label="Real play: the folded panel sits beside Plant Tycoon, Ctrl+E opens it, and clicking pots shows each plant with its water and health.">
+          <source src="media/hero.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption>Recorded in a real game: <kbd>Ctrl</kbd>+<kbd>E</kbd> opens the panel, and a click shows a plant's water and health.</figcaption>
+    </figure>
+  </section>
+
+  <section class="plate" aria-labelledby="ruleTitle">
+    <h2 class="plaque" id="ruleTitle">The one rule</h2>
+    <p class="big">Every seed is the <em>average</em> of its two parents, rounded up: leaves and flowers each on their own.</p>
+    <div class="demo" id="demo">
+      <div class="demo-parents">
+        <div class="demo-row">
+          <label for="rankA">Parent A's leaves</label>
+          <output for="rankA" id="nameA">Orchid (rank 4)</output>
+          <input type="range" id="rankA" min="1" max="23" value="4">
+        </div>
+        <div class="demo-row">
+          <label for="rankB">Parent B's leaves</label>
+          <output for="rankB" id="nameB">Bamboo (rank 12)</output>
+          <input type="range" id="rankB" min="1" max="23" value="12">
+        </div>
+      </div>
+      <div class="track" id="track" aria-hidden="true"></div>
+      <div class="track-key" aria-hidden="true"><span>1 Reptans, the lowest</span><span>23 Ridgeball, the highest</span></div>
+      <p class="demo-result" aria-live="polite">Their seed grows <strong id="nameChild">Ananas</strong> leaves <span class="demo-sum" id="rankChild">(4 + 12) &divide; 2 = 8</span></p>
+    </div>
+    <div class="narrow">
+      <p>So <strong>no cross can ever beat your best plant</strong>. If you have crossed your two best plants for an hour and nothing new turns up, that is arithmetic, not bad luck. The only way up is new stock: seed packets from the shop, or Mutation Liquid.</p>
+      <p class="note">The journal knows this rule, works out every one of the 529 species from it, and tells you the moment you hit the ceiling instead of letting you grind.</p>
+    </div>
+  </section>
+
+  <section class="plate" aria-labelledby="doesTitle">
+    <h2 class="plaque" id="doesTitle">What it does</h2>
+    <div class="features">
+      <article class="feature">
+        <figure class="shot"><img src="media/advice.webp" width="950" height="593" alt="The panel's advice: plant the Aureus Lemonbush from the drawer, then which seed goes in which numbered pot." loading="lazy"></figure>
+        <div>
+          <h3>Names the pots</h3>
+          <p>"Plant the Fourpetal Fern in pot 12." "Cross pot 3 with pot 7." Real pot numbers you can act on, not a chart to decode.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <figure class="shot"><img src="media/seeds.webp" width="760" height="474" alt="The nursery in the panel during real play: the player's own plants in pots 1, 2, 3 and 6, with pot 1 selected." loading="lazy"></figure>
+        <div>
+          <h3>Reads the game live</h3>
+          <p>Cash, all fifteen pots, water, health, growth and every seed in storage, five times a second. Nothing to export, nothing to type in.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <figure class="shot"><img src="media/road.webp" width="760" height="474" alt="The goal in the panel during real play: aiming for the Magic Tree of Fragrance, one step away, and the next thing to do." loading="lazy"></figure>
+        <div>
+          <h3>Plans the road to a Magic Plant</h3>
+          <p>It picks the closest of the six Magic Plants, or the one you choose, and lists every purchase, planting and cross, ticking each off as it happens in your game.</p>
+        </div>
+      </article>
+      <article class="feature">
+        <figure class="shot is-bar"><img src="media/bar.webp" width="680" height="150" alt="The panel folded into a slim bar during real play: the next step, 15 of 15 pots planted, read live, and the cash." loading="lazy"></figure>
+        <div>
+          <h3>Stays out of the way</h3>
+          <p>Folded, it is a slim bar over the game. <kbd>Ctrl</kbd>+<kbd>E</kbd> opens it without leaving the game, and one click launches Plant Tycoon fullscreen with the panel on top.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="plate" id="start" aria-labelledby="startTitle">
+    <h2 class="plaque" id="startTitle">Get started</h2>
+    <ol class="steps">
+      <li>
+        <strong>Download and run the installer</strong>
+        <p>Windows may say "Windows protected your PC", because the app is not code-signed: signing costs a yearly fee and this app is free. Click <b>More info</b>, then <b>Run anyway</b>.</p>
+      </li>
+      <li>
+        <strong>Click Launch Plant Tycoon</strong>
+        <p>Open Isola Field Journal and launch the game from it. The game opens fullscreen with the panel on top. If the panel cannot find your game, it says so.</p>
+      </li>
+      <li>
+        <strong>Play</strong>
+        <p>The panel follows along as you play. Press <kbd>Ctrl</kbd>+<kbd>E</kbd> to open or fold it.</p>
+      </li>
+    </ol>
+    <div class="safe">
+      <h3>Is it safe?</h3>
+      <ul>
+        <li><b>It only reads.</b> It never writes to the game or to your saves.</li>
+        <li><b>It never goes online.</b> No account, no ads, no tracking, no update checks.</li>
+        <li><b>It contains nothing from the game.</b> The pictures in the panel are read from your own installation.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="plate" aria-labelledby="faqTitle">
+    <h2 class="plaque" id="faqTitle">Questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Does it work on a Mac, iPhone or Android?</summary>
+        <p>No. It is for Windows 10 and 11, with the PC version of Plant Tycoon.</p>
+      </details>
+      <details>
+        <summary>Which copy of Plant Tycoon does it need?</summary>
+        <p>It is tested with the Steam version. Other PC copies installed in the usual places should work too; if the panel cannot find the game, it tells you where it looked.</p>
+      </details>
+      <details>
+        <summary>Will it change my save or play the game for me?</summary>
+        <p>Neither. It never writes anything, and it never clicks anything. It tells you what to do; you still play.</p>
+      </details>
+      <details>
+        <summary>Why does Windows warn me about it?</summary>
+        <p>Windows warns about every program that is not code-signed, and signing costs a yearly fee. This app is free, so it is not signed. Click "More info", then "Run anyway".</p>
+      </details>
+      <details>
+        <summary>How do I update it?</summary>
+        <p>Download the latest version from this page and install it over the old one. Hover over the panel's close button to see which version you have. The app never checks online by itself.</p>
+      </details>
+      <details>
+        <summary>Is it really free?</summary>
+        <p>Yes. No ads, no account, nothing to buy, now or later.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>No game open right now?</h2>
+    <p>Try the breeding calculator: cross any two plants, find the shortest route to the one you want, and see the recipe for all six Magic Plants.</p>
+    <a class="btn-wood" href="calculator.html">Open the breeding calculator</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <nav aria-label="More">
+      <a href="calculator.html">Breeding calculator</a>
+      <a href="https://github.com/Kjubikstronk/isola-field-journal/releases">All versions and changes</a>
+      <a href="LICENSE.txt">Licence</a>
+      <a href="https://store.steampowered.com/app/16120/Plant_Tycoon/">Plant Tycoon on Steam</a>
+    </nav>
+    <p>Isola Field Journal is an unofficial fan project. Plant Tycoon is a trademark of Last Day of Work, who are not involved and do not endorse it. No part of the game is included: the panel reads it from your own installation.</p>
+  </div>
+</footer>
+
+<script type="module" src="hook.js"></script>
+</body>
+</html>

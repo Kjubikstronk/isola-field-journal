@@ -1,0 +1,20 @@
+Isola Field Journal
+Copyright (c) 2026 Kjubikstronk. All rights reserved.
+
+You may download, install and use Isola Field Journal for free, for personal
+use. You may share links to this website and to its download page.
+
+You may not sell it, bundle it with other software, or distribute modified
+copies of it.
+
+Isola Field Journal is provided "as is", without warranty of any kind. The
+author is not liable for any damage or data loss arising from its use. It only
+reads the game and its save files and never writes to them.
+
+Isola Field Journal is an unofficial fan project. Plant Tycoon is a trademark
+of Last Day of Work, who are not involved and do not endorse it. No part of the
+game is included: the app reads the game's pictures from the player's own
+installation while it runs.
+
+The fonts on this website (Libre Caslon Display, Libre Caslon Text, Spectral)
+are used under the SIL Open Font License 1.1; their licences are in fonts/.

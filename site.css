@@ -1,0 +1,671 @@
+/* Isola Field Journal - the website. The same field-journal look as the app
+   (DESIGN.md): dark wood ground, golden cream paper, dark red-brown ink, and
+   the plaque's materials - wood, gold rim - drawn in CSS. No game art. */
+
+@font-face { font-family: "Libre Caslon Display"; src: url(fonts/libre-caslon-display-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Libre Caslon Text"; src: url(fonts/libre-caslon-text-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Libre Caslon Text"; src: url(fonts/libre-caslon-text-latin-700-normal.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: Spectral; src: url(fonts/spectral-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: Spectral; src: url(fonts/spectral-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+
+/* One theme, on purpose: the journal is dark wood with paper on it, in light
+   and dark mode alike, as in the app. */
+:root {
+  color-scheme: dark;
+  --ground-top: #3A1404;
+  --ground: #220A01;
+  --bar: linear-gradient(180deg, #9E2C04 0%, #5E1602 100%);
+  --paper: linear-gradient(180deg, #F8EACB 0%, #F0D7A0 100%);
+  --paper-flat: #F4E1B5;
+  --paper-light: #FBF0D4;
+  --paper-deep: #EFD59B;
+  --paper-edge: #D9AE62;
+  --ink: #3E1602;
+  --ink-soft: #7A3E14;
+  --on-ground: #FFF1D6;
+  --on-ground-soft: #E9C994;
+  --brass-light: #F6C76A;
+  --rim-dark: #5D1A00;
+  --rim-light: #FFF1D6;
+  --rim-gold: #DDA73B;
+  --wood-light: #E87508;
+  --wood: #CF4A04;
+  --wood-red: #941E00;
+  --moss: #4A7A26;
+  --terracotta: #B52002;
+  --link: #A8380A;
+  --rim: 0 0 0 1px var(--rim-dark), inset 0 0 0 1px var(--rim-light), inset 0 0 0 2px var(--rim-gold);
+  --carved: 0 1px 0 rgba(40, 8, 0, .9), 0 2px 3px rgba(40, 8, 0, .55);
+  --t1: #7D8F5A;
+  --t2: #4A7A26;
+  --t3: linear-gradient(180deg, #E87508, #CF4A04);
+  --t4: linear-gradient(180deg, #CF3800, #941E00);
+  --t1-flat: #7D8F5A; --t2-flat: #4A7A26; --t3-flat: #DB6006; --t4-flat: #B12B00;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ground) linear-gradient(180deg, var(--ground-top) 0, var(--ground) 640px) no-repeat;
+  color: var(--on-ground);
+  font: 400 17px/1.6 Spectral, Georgia, serif;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 2px; border-radius: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---- the bar across the top: the app's own wood bar ---- */
+.topbar {
+  background: var(--bar);
+  border-bottom: 1px solid var(--rim-dark);
+  box-shadow: inset 0 1px 0 rgba(255, 200, 120, .35), inset 0 -1px 0 var(--rim-gold);
+}
+.topbar-in {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font: 400 22px/1.1 "Libre Caslon Display", Georgia, serif;
+  color: var(--rim-light);
+  text-shadow: var(--carved);
+  margin-right: auto;
+}
+.wordmark img { width: 28px; height: 28px; }
+.topnav { display: flex; align-items: center; gap: 18px; }
+.topnav a:not(.btn-wood) {
+  font: 700 14px/1 "Libre Caslon Text", Georgia, serif;
+  color: var(--brass-light);
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(40, 8, 0, .7);
+}
+.topnav a:not(.btn-wood):hover { color: var(--rim-light); }
+
+main { max-width: 1040px; margin: 0 auto; padding: 0 16px 24px; }
+
+/* ---- buttons: a piece of the plaque's wood with its gold edge ---- */
+.btn-wood {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px 13px 20px;
+  border: 1px solid var(--rim-dark);
+  border-radius: 9px;
+  background: linear-gradient(180deg, #E06608 0%, #9E2C04 100%);
+  box-shadow: inset 0 1px 0 rgba(243, 174, 105, .9), 0 0 0 2px rgba(221, 167, 59, .65), 0 4px 10px rgba(20, 6, 0, .45);
+  color: var(--rim-light);
+  text-shadow: 0 1px 0 rgba(60, 10, 0, .8);
+  font: 700 17px/1.1 "Libre Caslon Text", Georgia, serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: scale .15s ease-out;
+}
+.btn-wood:hover { background: linear-gradient(180deg, #EE7A10 0%, #B23604 100%); color: #fff; }
+.btn-wood:active { scale: .96; }
+.btn-wood svg { flex: 0 0 auto; }
+.btn-wood.small { padding: 8px 14px 8px 12px; font-size: 14px; gap: 7px; border-radius: 7px; }
+
+.btn-paper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--paper-edge);
+  border-radius: 7px;
+  background: var(--paper-light);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(60, 20, 0, .18);
+  color: var(--ink);
+  font: 700 14px/1.1 "Libre Caslon Text", Georgia, serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: scale .15s ease-out;
+}
+.btn-paper:hover { background: #fff; border-color: var(--rim-gold); }
+.btn-paper:active { scale: .96; }
+
+/* The quiet second button on the dark wood: a gold outline. */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 9px;
+  border: 1px solid rgba(221, 167, 59, .7);
+  background: rgba(40, 8, 0, .35);
+  color: var(--brass-light);
+  font: 700 16px/1.1 "Libre Caslon Text", Georgia, serif;
+  text-decoration: none;
+  transition: scale .15s ease-out;
+}
+.btn-ghost:hover { background: rgba(221, 167, 59, .18); color: var(--rim-light); }
+.btn-ghost:active { scale: .96; }
+
+/* ---- hero ---- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: 40px;
+  align-items: center;
+  padding: 56px 0 24px;
+}
+.eyebrow {
+  margin: 0 0 12px;
+  font: 700 13px/1.2 "Libre Caslon Text", Georgia, serif;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  text-wrap: balance;
+}
+/* A phone cannot run it: say so where the download button is. */
+.only-small { display: none; }
+@media (max-width: 760px) {
+  .only-small { display: block; margin: 14px 0 0; font-size: 15px; color: var(--on-ground-soft); }
+  .only-small a { color: var(--brass-light); }
+}
+h1 {
+  margin: 0;
+  font: 400 clamp(38px, 6.2vw, 62px)/1.04 "Libre Caslon Display", Georgia, serif;
+  color: var(--rim-light);
+  text-shadow: var(--carved);
+  text-wrap: balance;
+}
+.lede {
+  margin: 20px 0 28px;
+  max-width: 34em;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--on-ground-soft);
+  text-wrap: pretty;
+}
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+.cta-meta { margin: 14px 0 0; font-size: 15px; color: var(--on-ground-soft); }
+/* Three short facts, set off by gold dots. */
+.trust { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14.5px; color: var(--on-ground-soft); }
+.trust li { display: inline-flex; align-items: center; gap: 8px; }
+.trust li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--rim-gold); box-shadow: 0 0 0 2px rgba(221, 167, 59, .2); }
+.fineprint { margin: 18px 0 0; font-size: 14px; line-height: 1.5; color: rgba(233, 201, 148, .8); max-width: 36em; }
+.fineprint a { color: var(--brass-light); }
+
+/* The picture of the panel sits in a gilt frame, like the app's gauges. */
+.hero-media { margin: 0; justify-self: center; }
+.frame {
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ground);
+  box-shadow: 0 0 0 1px var(--rim-dark), 0 0 0 2px var(--rim-light), 0 0 0 4px var(--rim-gold),
+    0 0 0 5px var(--rim-dark), 0 18px 40px rgba(0, 0, 0, .55);
+}
+.frame img, .frame video { width: 100%; }
+.hero-media .frame { max-width: 520px; }
+.hero-media figcaption { margin-top: 16px; text-align: center; font-size: 14px; line-height: 1.6; color: var(--on-ground-soft); }
+
+/* ---- plates: paper with the plaque's rim, the title mounted on its top edge ---- */
+.plate {
+  position: relative;
+  margin-top: 64px;
+  padding: 44px 32px 30px;
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--rim), 0 4px 12px rgba(20, 6, 0, .5);
+}
+.plate > .plaque { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); }
+.plaque {
+  margin: 0;
+  display: inline-block;
+  padding: 10px 28px 11px;
+  border-radius: 12px;
+  font: 700 14px/1 "Libre Caslon Text", Georgia, serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #3B1402;
+  text-shadow: 0 1px 0 rgba(255, 228, 170, .55);
+  background:
+    repeating-linear-gradient(97deg, rgba(150, 40, 0, .09) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg, #F59A2C 0%, #E87508 42%, #C24A06 100%);
+  box-shadow: 0 0 0 1px var(--rim-dark), 0 0 0 2px var(--rim-light), 0 0 0 4px var(--rim-gold),
+    0 0 0 5px var(--rim-dark), 0 6px 8px 3px rgba(40, 8, 0, .4);
+}
+.plate h3 {
+  margin: 0 0 6px;
+  font: 700 19px/1.25 "Libre Caslon Text", Georgia, serif;
+  color: var(--ink);
+}
+.plate p { margin: 0 0 14px; text-wrap: pretty; }
+.plate p:last-child { margin-bottom: 0; }
+.plate a { color: var(--link); }
+.plate .big {
+  font: 400 clamp(22px, 3.2vw, 28px)/1.3 "Libre Caslon Display", Georgia, serif;
+  color: var(--ink);
+  text-align: center;
+  max-width: 26em;
+  margin: 0 auto 26px;
+  text-wrap: balance;
+}
+.plate .big em { font-style: normal; color: var(--wood); }
+.plate .note { color: var(--ink-soft); font-size: 15.5px; }
+.narrow { max-width: 42em; margin-left: auto; margin-right: auto; }
+
+/* ---- the one rule, live ---- */
+/* The demo sits in a dark wood inset on the paper, like the panel's own bar. */
+.demo {
+  max-width: 760px;
+  margin: 0 auto 26px;
+  padding: 22px 24px 20px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #3A1404 0%, #250B01 100%);
+  color: var(--on-ground);
+  box-shadow: 0 0 0 1px var(--rim-dark), inset 0 0 0 1px rgba(221, 167, 59, .55), inset 0 3px 8px rgba(0, 0, 0, .45),
+    0 2px 6px rgba(40, 10, 0, .25);
+}
+.demo-parents { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+.demo-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 6px 12px;
+}
+.demo-row label { font: 700 14px/1.3 "Libre Caslon Text", Georgia, serif; color: var(--brass-light); }
+.demo-row output { font: 600 15px/1.2 Spectral, Georgia, serif; color: var(--on-ground); text-align: right; }
+.demo-row input[type="range"] { grid-column: 1 / -1; width: 100%; accent-color: var(--wood-light); }
+/* The 23 ranks as numbered tiles: the parents in gold, the seed in the plaque's wood. */
+.track {
+  display: grid;
+  grid-template-columns: repeat(23, minmax(0, 1fr));
+  gap: 3px;
+  margin: 20px 0 6px;
+}
+.track span {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  border-radius: 3px;
+  font: 600 11px/1 Spectral, Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 241, 214, .45);
+  background: rgba(255, 241, 214, .05);
+  box-shadow: inset 0 0 0 1px rgba(221, 167, 59, .22);
+}
+.track span.is-a, .track span.is-b { background: #B8892B; color: #2A0E02; box-shadow: inset 0 1px 0 rgba(255, 241, 214, .4); }
+.track span.is-child {
+  background: linear-gradient(180deg, #F08A1C, #C24A06);
+  color: var(--rim-light);
+  box-shadow: 0 0 0 1px var(--rim-dark), 0 0 0 2px var(--rim-gold);
+}
+.track-key { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; color: rgba(233, 201, 148, .75); }
+.demo-result {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(221, 167, 59, .3);
+  text-align: center;
+  font-size: 17px;
+}
+.demo-result strong { font: 700 19px/1.3 "Libre Caslon Text", Georgia, serif; color: #F59A2C; }
+.demo-sum { display: block; margin-top: 4px; font-size: 14.5px; color: var(--on-ground-soft); font-variant-numeric: tabular-nums; }
+
+/* ---- what it does ---- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 6px;
+  background: var(--paper-light);
+  border: 1px solid var(--paper-edge);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(60, 20, 0, .15);
+}
+.feature .shot {
+  margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ground);
+  box-shadow: 0 0 0 1px var(--rim-dark), 0 0 0 2px var(--rim-gold);
+}
+.feature .shot img { width: 100%; outline: 1px solid rgba(0, 0, 0, .1); outline-offset: -1px; }
+/* The folded bar is a strip: it sits in the middle of a frame as tall as the others. */
+.feature .shot.is-bar { aspect-ratio: 950 / 593; display: grid; place-items: center; padding: 0 16px; }
+.feature .shot.is-bar img { outline: 0; }
+.feature p { font-size: 16px; color: var(--ink-soft); }
+
+/* ---- getting started ---- */
+/* Three step cards side by side, each numbered on a piece of the plaque's wood. */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  padding: 20px 18px 18px;
+  border-radius: 6px;
+  background: var(--paper-light);
+  border: 1px solid var(--paper-edge);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(60, 20, 0, .15);
+  text-align: center;
+}
+.steps li::before {
+  content: counter(step);
+  width: 36px;
+  height: 36px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  font: 700 17px/1 "Libre Caslon Text", Georgia, serif;
+  color: var(--rim-light);
+  background: linear-gradient(180deg, #E06608, #9E2C04);
+  box-shadow: 0 0 0 1px var(--rim-dark), 0 0 0 2px var(--rim-gold), inset 0 1px 0 rgba(243, 174, 105, .8);
+}
+.steps strong { font: 700 17px/1.3 "Libre Caslon Text", Georgia, serif; display: block; margin-bottom: 6px; }
+.steps p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--paper-edge);
+  border-bottom-width: 2px;
+  background: var(--paper-light);
+  font: 600 14px/1.3 Spectral, Georgia, serif;
+  color: var(--ink);
+}
+.safe {
+  margin: 22px 0 0;
+  padding: 18px 22px 20px;
+  border-radius: 6px;
+  background: rgba(74, 122, 38, .08);
+  border: 1px solid rgba(74, 122, 38, .45);
+}
+.safe h3 { color: var(--moss); margin-bottom: 10px; }
+.safe ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 24px; }
+.safe li { position: relative; padding-left: 26px; font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
+.safe li b { color: var(--ink); }
+/* A drawn check mark, in the moss green of "go". */
+.safe li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 3px;
+  width: 7px;
+  height: 13px;
+  border: solid var(--moss);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+/* ---- questions ---- */
+.faq { max-width: 44em; margin: 0 auto; }
+.faq details { border-top: 1px solid var(--paper-edge); }
+.faq details:last-child { border-bottom: 1px solid var(--paper-edge); }
+.faq summary {
+  cursor: pointer;
+  padding: 14px 4px;
+  font: 700 17px/1.35 "Libre Caslon Text", Georgia, serif;
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "+"; flex: 0 0 auto; width: 14px; color: var(--wood); font-size: 20px; line-height: 1; }
+.faq details[open] summary::before { content: "\2212"; }
+.faq details > p { margin: 0 0 16px 30px; color: var(--ink-soft); }
+
+/* ---- the closing call ---- */
+/* A framed card of dark wood with a gold edge. */
+.closing {
+  margin-top: 64px;
+  padding: 44px 28px 40px;
+  border-radius: 8px;
+  text-align: center;
+  background: linear-gradient(180deg, #321103 0%, #1E0801 100%);
+  box-shadow: 0 0 0 1px var(--rim-dark), inset 0 0 0 1px rgba(221, 167, 59, .75), inset 0 1px 0 2px rgba(255, 200, 120, .08),
+    0 10px 28px rgba(0, 0, 0, .45);
+}
+.closing h2 {
+  margin: 0 0 10px;
+  font: 400 clamp(28px, 4.4vw, 40px)/1.15 "Libre Caslon Display", Georgia, serif;
+  color: var(--rim-light);
+  text-shadow: var(--carved);
+  text-wrap: balance;
+}
+.closing p { margin: 0 auto 22px; max-width: 32em; color: var(--on-ground-soft); }
+
+/* ---- footer ---- */
+.footer {
+  margin-top: 48px;
+  border-top: 1px solid rgba(221, 167, 59, .35);
+  background: rgba(0, 0, 0, .18);
+}
+.footer-in { max-width: 1040px; margin: 0 auto; padding: 24px 16px 32px; font-size: 14px; line-height: 1.6; color: rgba(233, 201, 148, .8); }
+.footer nav { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 12px; }
+.footer a { color: var(--brass-light); }
+.footer p { margin: 0 0 6px; max-width: 60em; }
+
+/* ---- calculator ---- */
+.page-head { padding: 48px 0 8px; text-align: center; }
+.page-head h1 { font-size: clamp(32px, 5.4vw, 52px); }
+.page-head .lede { margin: 16px auto 0; }
+.tool { max-width: 760px; margin-left: auto; margin-right: auto; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field > span { font: 700 14px/1.3 "Libre Caslon Text", Georgia, serif; color: var(--ink); }
+.field input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--paper-edge);
+  background: #FFF8E6;
+  box-shadow: inset 0 1px 2px rgba(60, 20, 0, .15);
+  color: var(--ink);
+  font: 400 17px/1.3 Spectral, Georgia, serif;
+}
+.field input:focus-visible { outline: 2px solid var(--wood); outline-offset: 1px; }
+.field input[aria-invalid="true"] { border-color: var(--terracotta); }
+.cross-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px;
+}
+.times { padding-bottom: 10px; font: 400 26px/1 "Libre Caslon Display", Georgia, serif; color: var(--ink-soft); }
+.result {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 6px;
+  background: var(--paper-light);
+  border: 1px solid var(--rim-gold);
+  box-shadow: 0 0 0 1px var(--rim-dark), inset 0 0 0 1px var(--rim-light);
+}
+.result:empty { display: none; }
+.result .name { font: 400 26px/1.2 "Libre Caslon Display", Georgia, serif; color: var(--ink); }
+.result p { margin: 6px 0 0; color: var(--ink-soft); }
+.result .magic-note { color: var(--wood); font-weight: 600; }
+.result.is-error { border-color: var(--terracotta); box-shadow: none; }
+.tier {
+  display: inline-block;
+  min-width: 26px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--rim-dark);
+  box-shadow: inset 0 1px 0 rgba(255, 241, 214, .45);
+  font: 700 12px/1.4 "Libre Caslon Text", Georgia, serif;
+  color: var(--rim-light);
+  text-align: center;
+  vertical-align: 2px;
+}
+.tier.t1 { background: var(--t1); }
+.tier.t2 { background: var(--t2); }
+.tier.t3 { background: var(--t3); }
+.tier.t4 { background: var(--t4); }
+
+.own-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.chips { list-style: none; margin: 12px 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips:empty::before { content: "No plants yet: add the ones you grow or hold as seed."; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 11px;
+  border-radius: 999px;
+  background: var(--paper-light);
+  border: 1px solid var(--paper-edge);
+  font: 600 15px/1.3 Spectral, Georgia, serif;
+}
+.chips button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.chips button:hover { background: var(--paper-deep); color: var(--terracotta); }
+.route { margin: 0; padding: 0; list-style: none; counter-reset: route; }
+.route li {
+  position: relative;
+  padding: 8px 0 8px 36px;
+  border-top: 1px solid var(--paper-edge);
+  counter-increment: route;
+}
+.route li:first-child { border-top: 0; }
+.route li::before {
+  content: counter(route);
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--moss);
+  color: var(--rim-light);
+  font: 700 13px/1 "Libre Caslon Text", Georgia, serif;
+}
+.route b { font-weight: 600; color: var(--ink); }
+
+.magic-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.magic {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 6px;
+  background: var(--paper-light);
+  border: 1px solid var(--paper-edge);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(60, 20, 0, .15);
+}
+.magic h3 { font-size: 18px; margin-bottom: 2px; }
+.magic .species { margin: 0 0 10px; font: 400 17px/1.3 "Libre Caslon Display", Georgia, serif; color: var(--wood); }
+.magic p { margin: 0 0 8px; font-size: 15.5px; color: var(--ink-soft); }
+.magic .btn-paper { margin-top: auto; align-self: flex-start; }
+
+.chart-wrap { overflow-x: auto; margin: 0 -8px; padding: 4px 8px 8px; }
+.chart {
+  display: grid;
+  grid-template-columns: 7.5em repeat(23, minmax(18px, 1fr));
+  gap: 2px;
+  min-width: 600px;
+  font-size: 12px;
+}
+.chart .col-head {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  justify-self: center;
+  padding-bottom: 4px;
+  font: 600 11.5px/1 Spectral, Georgia, serif;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.chart .row-head { font: 600 12.5px/18px Spectral, Georgia, serif; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chart button {
+  aspect-ratio: 1;
+  min-height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: scale .15s ease-out;
+}
+.chart button:active { scale: .96; }
+.chart button.t1 { background: var(--t1-flat); }
+.chart button.t2 { background: var(--t2-flat); }
+.chart button.t3 { background: var(--t3-flat); }
+.chart button.t4 { background: var(--t4-flat); }
+.chart button.is-magic { box-shadow: inset 0 0 0 2px var(--brass-light), 0 0 0 1px var(--rim-dark); }
+.chart button[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 4px 0 14px; font-size: 14px; color: var(--ink-soft); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
+
+.all-species summary { cursor: pointer; font: 700 16px/1.4 "Libre Caslon Text", Georgia, serif; padding: 8px 0; }
+.species-columns { columns: 3 220px; column-gap: 28px; margin-top: 8px; }
+.species-columns section { break-inside: avoid; margin-bottom: 14px; }
+.species-columns h4 { margin: 0 0 4px; font: 700 14px/1.3 "Libre Caslon Text", Georgia, serif; color: var(--ink); }
+.species-columns ul { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+
+.cta-band {
+  margin-top: 64px;
+  padding: 28px;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--bar);
+  box-shadow: 0 0 0 1px var(--rim-dark), inset 0 1px 0 rgba(255, 200, 120, .35), 0 0 0 3px var(--rim-gold), 0 0 0 4px var(--rim-dark);
+}
+.cta-band h2 { margin: 0 0 8px; font: 400 clamp(24px, 3.6vw, 32px)/1.2 "Libre Caslon Display", Georgia, serif; color: var(--rim-light); text-shadow: var(--carved); }
+.cta-band p { margin: 0 auto 18px; max-width: 34em; color: var(--on-ground-soft); }
+.cta-band .btn-wood { box-shadow: inset 0 1px 0 rgba(243, 174, 105, .9), 0 0 0 2px var(--rim-gold), 0 4px 10px rgba(20, 6, 0, .45); }
+
+/* ---- small screens ---- */
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 36px; }
+  .hero-media .frame { max-width: 340px; }
+  .plate { padding: 40px 18px 22px; margin-top: 56px; }
+  .plaque { font-size: 12.5px; padding: 9px 20px 10px; }
+  .features { grid-template-columns: minmax(0, 1fr); }
+  .magic-grid { grid-template-columns: minmax(0, 1fr); }
+  .demo { padding: 16px 14px 14px; }
+  .demo-parents { grid-template-columns: minmax(0, 1fr); }
+  /* 23 tiles do not fit a phone in one row: two rows of 12 and 11. */
+  .track { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .steps, .safe ul { grid-template-columns: minmax(0, 1fr); }
+  .closing { padding: 34px 18px 30px; }
+  .cross-row { grid-template-columns: minmax(0, 1fr); }
+  .times { padding: 0; text-align: center; }
+  .topnav .hide-small { display: none; }
+  .wordmark { font-size: 19px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .magic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
